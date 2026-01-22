@@ -15,6 +15,7 @@ export interface NavItem {
     href: NonNullable<InertiaLinkProps['href']>;
     icon?: LucideIcon;
     isActive?: boolean;
+    new_tab?: boolean;
 }
 
 export type AppPageProps<
@@ -38,3 +39,11 @@ export interface User {
 }
 
 export type BreadcrumbItemType = BreadcrumbItem;
+
+export interface TaskStatus {
+    id: number;
+    title: string;
+    created_at: string;
+    updated_at: string;
+    [key: string]: unknown;
+}
