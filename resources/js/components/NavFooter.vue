@@ -32,7 +32,12 @@ defineProps<Props>();
                             :href="toUrl(item.href)"
                             target="_blank"
                             rel="noopener noreferrer"
+                            v-if="item.new_tab"
                         >
+                            <component :is="item.icon" />
+                            <span>{{ item.title }}</span>
+                        </a>
+                        <a :href="toUrl(item.href)" v-else>
                             <component :is="item.icon" />
                             <span>{{ item.title }}</span>
                         </a>
