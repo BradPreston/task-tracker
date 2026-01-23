@@ -70,6 +70,7 @@ class CompanyController extends Controller
             'website' => 'nullable|url',
         ]);
         $company->update($request->all());
+
         return redirect()->route('companies.show', $company->id)->with('success', 'Company updated successfully');
     }
 
@@ -79,6 +80,7 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         $company->delete();
+
         return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
     }
 }

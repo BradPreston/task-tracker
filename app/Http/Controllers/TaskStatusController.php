@@ -14,6 +14,7 @@ class TaskStatusController extends Controller
     public function index()
     {
         $taskStatuses = TaskStatus::orderBy('created_at', 'asc')->get();
+
         return Inertia::render('TaskStatuses/Index', [
             'taskStatuses' => $taskStatuses,
         ]);
@@ -33,6 +34,7 @@ class TaskStatusController extends Controller
             'title' => 'required|string|max:255',
         ]);
         TaskStatus::create($request->all());
+
         return redirect()->route('status.index')->with('success', 'Task status created successfully');
     }
 
@@ -65,6 +67,7 @@ class TaskStatusController extends Controller
             'title' => 'required|string|max:255',
         ]);
         $taskStatus->update($request->all());
+
         return redirect()->route('status.show', $taskStatus->id)->with('success', 'Task status updated successfully');
     }
 
@@ -74,6 +77,7 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         $taskStatus->delete();
+
         return redirect()->route('status.index')->with('success', 'Task status deleted successfully');
     }
 }
