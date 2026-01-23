@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Company;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class CompanyController extends Controller
 {
@@ -12,7 +13,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+        return Inertia::render('Companies/Index', [
+            'companies' => Company::all(),
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        return Inertia::render('Companies/Create');
     }
 
     /**
@@ -28,7 +31,13 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'website' => 'nullable|url',
+        ]);
+        Company::create($request->all());
+
+        return redirect()->route('companies.index');
     }
 
     /**
@@ -36,7 +45,9 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        //
+        return Inertia::render('Companies/Show', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -44,7 +55,9 @@ class CompanyController extends Controller
      */
     public function edit(Company $company)
     {
-        //
+        return Inertia::render('Companies/Edit', [
+            'company' => $company,
+        ]);
     }
 
     /**
@@ -52,7 +65,12 @@ class CompanyController extends Controller
      */
     public function update(Request $request, Company $company)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'website' => 'nullable|url',
+        ]);
+        $company->update($request->all());
+        return redirect()->route('companies.show', $company->id)->with('success', 'Company updated successfully');
     }
 
     /**
@@ -60,6 +78,7 @@ class CompanyController extends Controller
      */
     public function destroy(Company $company)
     {
-        //
+        $company->delete();
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully');
     }
 }

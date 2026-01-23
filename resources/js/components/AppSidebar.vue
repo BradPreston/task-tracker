@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { BookOpen, Folder, LayoutGrid, SquareMenu } from 'lucide-vue-next';
+import { LayoutGrid, SquareMenu, Building } from 'lucide-vue-next';
 
 import NavFooter from '@/components/NavFooter.vue';
 import NavMain from '@/components/NavMain.vue';
@@ -20,12 +20,14 @@ import { type NavItem } from '@/types';
 
 import AppLogo from './AppLogo.vue';
 
+import { index as companiesIndex } from '@/routes/companies';
+
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
         href: dashboard(),
         icon: LayoutGrid,
-    },
+    }
 ];
 
 const footerNavItems: NavItem[] = [
@@ -35,17 +37,10 @@ const footerNavItems: NavItem[] = [
         icon: SquareMenu,
     },
     {
-        title: 'Github Repo',
-        href: 'https://github.com/laravel/vue-starter-kit',
-        icon: Folder,
-        new_tab: true,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits#vue',
-        icon: BookOpen,
-        new_tab: true,
-    },
+        title: 'Companies',
+        href: companiesIndex(),
+        icon: Building,
+    }
 ];
 </script>
 
